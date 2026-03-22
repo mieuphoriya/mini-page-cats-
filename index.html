@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>TP API - The Cat API</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<main>
+<section class="section">
+
+    <h1>Trouves les chats!</h1>
+    <span id="cat">ᓚᘏᗢ</span>
+    <p>
+        Saisie le nom de la race de chat pour voir des images
+    </p>
+
+    <div class="search-section">
+        <input type="text" id="searchInput" placeholder="Ex: bengal"/>
+        <button id="searchBtn">Rechercher</button>
+        <button id="favoriteBtn">☆</button>
+    </div>
+
+    <div id="bloc-gif-attente" class="hidden">
+        <img src="img/loadingCat.gif">
+    </div>
+</section>
+<section class="section">
+    <div id="results"></div>
+
+    <h2>Mes chats favoris</h2>
+    <div id="favorites"></div>
+</section>
+    </main>
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>
