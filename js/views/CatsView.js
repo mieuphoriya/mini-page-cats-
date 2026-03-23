@@ -1,11 +1,12 @@
 /**
- * La view associé au model
- * @constructor
- * @param {container} - stock des images des chats
- * @param {loader} - l'animation de chargement
+ * La view associé au model Cats
  */
-export class ResultsView {
-
+export class CatsView {
+    /**
+     * @constructor
+     * @param {container} - stock des images des chats
+     * @param {loader} - l'animation de chargement
+     */
     constructor() {
         this.container = document.getElementById("results");
         this.loader = document.getElementById("bloc-gif-attente");
@@ -20,7 +21,7 @@ export class ResultsView {
     }
 
     /**
-     * Fonction pour remplir le conteneur html avec les données retourné par l'API
+     * pour remplir le conteneur html avec les données retourné par l'API
      * @param data - liste des images pour fabriquer les elements img
      */
     showResults(data) {

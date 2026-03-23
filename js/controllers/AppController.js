@@ -1,27 +1,34 @@
-import { SearchModel } from "../models/SearchModel.js";
-import { FavoritesModel } from "../models/FavoritesModel.js";
+import { Cats } from "../models/Cats.js";
+import { Favorites } from "../models/Favorites.js";
 import { SearchView } from "../views/SearchView.js";
-import { ResultsView } from "../views/ResultsView.js";
+import { CatsView } from "../views/CatsView.js";
 import { FavoritesView } from "../views/FavoritesView.js";
 
-/**
- * Le controller est initialisé avec tous les models et toutes les views
- */
+    /**
+     * Contrôleur principal de l'application
+     * Fait le lien entre les modèles (données) et les vues (interface utilisateur)
+     */
 export class AppController {
 
-    constructor() {
-        this.searchModel = new SearchModel();
-        this.favoritesModel = new FavoritesModel();
 
+    /**
+     * Le controller est initialisé avec tous les models et toutes les views
+     * lance l'application
+     */
+    constructor() {
+        this.cats = new Cats();
+        this.favorites = new Favorites();
         this.searchView = new SearchView();
-        this.resultsView = new ResultsView();
+        this.resultsView = new CatsView();
         this.favoritesView = new FavoritesView();
 
         this.init();
     }
 
     /**
-     * Fonction d'initialisation des views et des models
+     * Initialisation des interactions entre
+     * les vues et le contrôleur
+     * recherche, favoris, changement de saisie
      */
 
     init() {
@@ -30,7 +37,7 @@ export class AppController {
         this.searchView.bindFavorite((value) => this.handleFavorite(value));
 
         this.searchView.onInputChange = (value) => {
-            const isFav = this.favoritesModel.isFavorite(value);
+            const isFav = this.favorites.isFavorite(value);
             this.searchView.updateFavoriteButton(isFav);
         };
 
@@ -39,7 +46,7 @@ export class AppController {
     }
 
     /**
-     *
+     * Lance une recherche via le modèle et affiche les résultats
      * @returns {Promise<void>}
      */
     async handleSearch() {
@@ -47,49 +54,48 @@ export class AppController {
         if (!query) return;
 
         this.resultsView.showLoading();
-
-        const results = await this.searchModel.searchBreed(query);
-
+        const results = await this.cats.getCatsByBreed(query);
         this.resultsView.hideLoading();
         this.resultsView.showResults(results);
     }
 
     /**
-     *
-     * @param value
+     * Gère de l'ajout ou la suppression d'un favori
+     * @param {string} value - valeur saisie par l'utilisateur
      */
     handleFavorite(value) {
 
-        if (this.favoritesModel.isFavorite(value)) {
+        if (this.favorites.isFavorite(value)) {
 
             if (confirm("Supprimer ce favori ?")) {
-                this.favoritesModel.remove(value);
+                this.favorites.remove(value);
             }
 
         } else {
-            this.favoritesModel.add(value);
+            this.favorites.add(value);
         }
 
         this.searchView.updateFavoriteButton(
-            this.favoritesModel.isFavorite(value)
+            this.favorites.isFavorite(value)
         );
 
         this.updateFavorites();
     }
 
     /**
-     *
+     * Mise à jour l'affichage de la liste des favoris
+     * Gère les actions : clic sur un favori et suppression
      */
     updateFavorites() {
         this.favoritesView.render(
-            this.favoritesModel.getAll(),
+            this.favorites.getAll(),
             (item) => {
                 this.searchView.input.value = item;
                 this.handleSearch();
             },
             (item) => {
                 if (confirm("Supprimer ce favori ?")) {
-                    this.favoritesModel.remove(item);
+                    this.favorites.remove(item);
                     this.updateFavorites();
                 }
             }

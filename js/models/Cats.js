@@ -1,18 +1,18 @@
 import { BASE_URL, API_KEY } from "../config.js";
 
-export class SearchModel {
+export class Cats {
 
     constructor() {
     }
 
     /**
-     * La fonction de recherche de la race de chat fait 2 appels à l'API
+     * La methode de recherche de la race de chat fait 2 appels à l'API
      * 1) cherche la race du chat et recupere son id
      * 2) cherche les 5 images des chats en utilisant l'id
      * @param {string} query - le nom de la race de chat que l'utilisateur veut trouver
      * @returns {Promise<any>}
      */
-    async searchBreed(query) {
+    async getCatsByBreed(query) {
 
         const breedRes = await fetch(
             BASE_URL+`/breeds/search?q=${query}`,

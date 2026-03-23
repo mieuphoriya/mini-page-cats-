@@ -18,7 +18,7 @@ export class SearchView {
     }
 
     /**
-     * Fonction pour lier le bouton de recherche avec les actions de l'utilisateur
+     * pour lier le bouton de recherche avec les actions de l'utilisateur
      * le click de souris
      * le click clavier sur Enter
      *
@@ -46,7 +46,7 @@ export class SearchView {
     }
 
     /**
-     * Fonction pour lier le bouton favori avec les actions de l'utilisateur
+     * pour lier le bouton favori avec les actions de l'utilisateur
      * le click de souris
      * le click clavier sur Enter
      *
@@ -62,7 +62,8 @@ export class SearchView {
     }
 
     /**
-     * Fonction pour mettre à jour le bouton favori
+     * pour mettre à jour le bouton favori
+     *
      * @param isFavorite
      */
 
@@ -85,8 +86,9 @@ export class SearchView {
     }
 
     /**
+     * pour écouter les changements de l'imput
      *
-     * @param callback
+     * @param callback - fonction qui sera appellée lors de changement de texte
      */
     onInputChange(callback) {
         this.onInputChange = callback;

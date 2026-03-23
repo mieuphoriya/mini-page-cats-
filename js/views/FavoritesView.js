@@ -1,16 +1,18 @@
 /**
  * La view associé au model
- * @constructor
- * @param {container} - stock des races des chats favorites
- */
+*/
 export class FavoritesView {
-
+    /**
+     * La view associé au model
+     * @constructor
+     * @param {container} - stock des races des chats favorites
+     */
     constructor() {
         this.container = document.getElementById("favorites");
     }
 
     /**
-     * Fonction pour remplir le conteneur html et manipuler les favoris
+     * pour remplir le conteneur html et manipuler les favoris
      * @param favorites - liste des favoris
      * @param clickHandler
      * @param deleteHandler
